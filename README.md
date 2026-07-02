@@ -1,8 +1,10 @@
 # passport-kakao-login
 
+[한국어](./README-ko.md)
+
 [Passport](https://www.passportjs.org/) strategy for authenticating with [Kakao](https://developers.kakao.com/) using the OAuth 2.0 API.
 
-기존 [passport-kakao](https://github.com/rotoshine/passport-kakao) 패키지의 유지보수가 중단되어 새로 작성한 대체 패키지입니다. CommonJS/ESM 듀얼 모듈을 지원합니다.
+A maintained replacement for [passport-kakao](https://github.com/rotoshine/passport-kakao), whose maintenance has stopped. Ships dual CommonJS/ESM modules.
 
 ## Install
 
@@ -12,15 +14,15 @@ npm install passport-kakao-login passport
 
 ## Usage
 
-### 1. Kakao Developers 앱 설정
+### 1. Configure your Kakao Developers app
 
-[Kakao Developers](https://developers.kakao.com/) 콘솔에서 앱을 만들고 다음을 확인한다.
+In the [Kakao Developers](https://developers.kakao.com/) console, create an app and note:
 
-- **REST API 키** → `clientID`
-- **카카오 로그인 > Redirect URI** → `callbackURL`과 정확히 일치해야 한다
-- **보안 > Client Secret** 코드 → `clientSecret`. 기본적으로 활성화되어 있으며 활성화된 경우 토큰 발급 요청에 반드시 포함해야 한다
+- **REST API key** → `clientID`
+- **Kakao Login > Redirect URI** → must exactly match `callbackURL`
+- **Security > Client Secret** code → `clientSecret`. Enabled by default; if enabled, it must be included in the token request
 
-### 2. Strategy 등록
+### 2. Register the strategy
 
 ```ts
 import passport from 'passport'
@@ -34,7 +36,7 @@ passport.use(
       callbackURL: 'https://your-app.com/auth/kakao/callback',
     },
     (accessToken, refreshToken, profile, done) => {
-      // profile로 사용자를 조회하거나 새로 만든 뒤:
+      // look up or create the user from `profile`, then:
       done(null, user)
     }
   )
@@ -42,13 +44,13 @@ passport.use(
 
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser((id, done) => {
-  // id로 사용자를 조회해 done(null, user)
+  // look up the user by id, then done(null, user)
 })
 ```
 
-콘솔에서 Client Secret 기능을 끈 경우에 한해 `clientSecret`을 생략할 수 있다. 이 경우 `passport-oauth2` 요구사항을 맞추기 위한 임의 값(`'kakao'`)이 자동으로 채워진다.
+`clientSecret` can be omitted only if the Client Secret feature is disabled in the console. In that case a placeholder value (`'kakao'`) is filled in automatically to satisfy `passport-oauth2`.
 
-### 3. Express 라우트
+### 3. Express routes
 
 ```ts
 import express from 'express'
@@ -69,16 +71,16 @@ app.get(
 
 ### Profile
 
-verify 콜백에 전달되는 `profile`은 다음 구조를 가진다.
+The `profile` argument passed to the verify callback has the shape:
 
 ```ts
 {
   provider: 'kakao',
   id: number,
-  username: string,   // kakao_account.profile.nickname, 없으면 properties.nickname으로 대체
+  username: string,   // kakao_account.profile.nickname, falls back to properties.nickname
   displayName: string,
-  _raw: string,       // 원본 JSON 응답 문자열
-  _json: object,      // 파싱된 JSON 응답
+  _raw: string,       // raw JSON response body
+  _json: object,      // parsed JSON response
 }
 ```
 
@@ -88,7 +90,7 @@ verify 콜백에 전달되는 `profile`은 다음 구조를 가진다.
 npm install
 npm run build          # rollup -> dist/index.cjs, dist/index.mjs, dist/index.d.ts
 npm test                # vitest
-npm run test:coverage   # vitest --coverage (임계값 90%)
+npm run test:coverage   # vitest --coverage (90% threshold)
 npm run typecheck       # tsc --noEmit
 npm run lint             # eslint
 npm run format:check     # prettier --check
