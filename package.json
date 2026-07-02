@@ -1,6 +1,6 @@
 {
   "name": "passport-kakao-login",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Kakao OAuth2 authentication strategy for Passport",
   "license": "MIT",
   "author": "jhpung",
