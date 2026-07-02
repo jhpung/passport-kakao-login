@@ -78,6 +78,15 @@ describe('KakaoStrategy', () => {
     expect(strategy.name).toBe('kakao')
   })
 
+  it('kapi 요청 시 access_token을 쿼리 파라미터가 아닌 Authorization 헤더로 보낸다', () => {
+    const strategy = new KakaoStrategy(baseOptions, noopVerify)
+    const oauth2 = strategy['_oauth2'] as unknown as {
+      _useAuthorizationHeaderForGET: boolean
+    }
+
+    expect(oauth2._useAuthorizationHeaderForGET).toBe(true)
+  })
+
   it('kakao_account.profile.nickname으로 사용자 프로필을 파싱한다', async () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
     stubUserProfileResponse(strategy, {

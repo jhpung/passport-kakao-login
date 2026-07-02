@@ -32,6 +32,9 @@ export class KakaoStrategy extends OAuth2Strategy {
   ) {
     super(buildStrategyOptions(options), verify)
     this.name = 'kakao'
+    // Kakao API는 Authorization: Bearer 헤더만 인정한다.
+    // (passport-oauth2 기본값은 access_token을 쿼리 파라미터로 붙인다.)
+    this._oauth2.useAuthorizationHeaderforGET(true)
   }
 
   override userProfile(
