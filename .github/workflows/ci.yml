@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # engines.node >=22 이므로 최소 지원 버전(22)과 최신 Active LTS(24)를 검증한다.
-        node-version: ['22', '24']
+        # engines.node >=22 이므로 최소 지원 버전(22), 최신 Active LTS(24),
+        # 아직 LTS 승격 전인 최신 Current(26)까지 선행 검증한다.
+        node-version: ['22', '24', '26']
     steps:
       - uses: actions/checkout@v4
 
