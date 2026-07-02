@@ -46,7 +46,9 @@ export class KakaoStrategy extends OAuth2Strategy {
       try {
         const json = JSON.parse(body as string) as KakaoProfile['_json']
         const nickname =
-          json.kakao_account?.profile?.nickname ?? json.properties?.nickname ?? '미연동 계정'
+          json.kakao_account?.profile?.nickname ??
+          json.properties?.nickname ??
+          '미연동 계정'
 
         const profile: KakaoProfile = {
           provider: 'kakao',

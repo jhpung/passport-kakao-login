@@ -10,13 +10,22 @@ export default [
     input: 'src/index.ts',
     external,
     output: [
-      { file: 'dist/index.cjs', format: 'cjs', sourcemap: true, exports: 'named' },
+      {
+        file: 'dist/index.cjs',
+        format: 'cjs',
+        sourcemap: true,
+        exports: 'named',
+      },
       { file: 'dist/index.mjs', format: 'esm', sourcemap: true },
     ],
     plugins: [
       resolve(),
       commonjs(),
-      typescript({ tsconfig: './tsconfig.json', declaration: true, declarationDir: 'dist/types' }),
+      typescript({
+        tsconfig: './tsconfig.json',
+        declaration: true,
+        declarationDir: 'dist/types',
+      }),
     ],
   },
   {
