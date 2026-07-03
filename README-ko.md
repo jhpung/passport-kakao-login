@@ -77,10 +77,21 @@ verify 콜백에 전달되는 `profile`은 다음 구조를 가진다.
 {
   provider: 'kakao',
   id: number,
-  username: string,   // kakao_account.profile.nickname, 없으면 properties.nickname으로 대체
+  username: string,            // kakao_account.profile.nickname, 없으면 properties.nickname으로 대체
   displayName: string,
-  _raw: string,       // 원본 JSON 응답 문자열
-  _json: object,      // 파싱된 JSON 응답
+  kakao_account: KakaoAccount, // _json.kakao_account와 동일한 객체, 편의를 위해 최상위로 노출
+  _raw: string,                // 원본 JSON 응답 문자열
+  _json: object,               // 파싱된 JSON 응답
+}
+```
+
+`KakaoAccount` 타입은 패키지에서 export되므로, email·gender·birthday 같은 동의항목 필드를 `_json`을 거치지 않고 바로 타입 지정할 수 있다.
+
+```ts
+import type { KakaoAccount } from 'passport-kakao-login'
+
+function getEmail(kakaoAccount?: KakaoAccount): string | undefined {
+  return kakaoAccount?.email
 }
 ```
 

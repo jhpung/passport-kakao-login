@@ -53,6 +53,7 @@ export interface KakaoProfile {
   id: number
   username?: string
   displayName?: string
+  kakao_account?: KakaoAccount
   _raw: string
   _json: KakaoRawProfile
 }
