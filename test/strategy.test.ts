@@ -43,25 +43,25 @@ function stubUserProfileError(strategy: KakaoStrategy, err: OAuth2GetError) {
 }
 
 describe('buildStrategyOptions', () => {
-  it('clientSecret 미지정 시 kakao 기본값을 채운다', () => {
+  it('fills in the kakao default when clientSecret is not provided', () => {
     const options = buildStrategyOptions(baseOptions)
 
     expect(options.clientSecret).toBe('kakao')
   })
 
-  it('scopeSeparator 미지정 시 콤마를 기본값으로 채운다', () => {
+  it('fills in a comma as the default scopeSeparator', () => {
     const options = buildStrategyOptions(baseOptions)
 
     expect(options.scopeSeparator).toBe(',')
   })
 
-  it('User-Agent 미지정 시 패키지명을 기본값으로 채운다', () => {
+  it('fills in the package name as the default User-Agent', () => {
     const options = buildStrategyOptions(baseOptions)
 
     expect(options.customHeaders?.['User-Agent']).toBe('passport-kakao-login')
   })
 
-  it('User-Agent 지정 시 해당 값을 그대로 유지한다', () => {
+  it('keeps a custom User-Agent as-is when provided', () => {
     const options = buildStrategyOptions({
       ...baseOptions,
       customHeaders: { 'User-Agent': 'HELLO ROTO' },
@@ -72,13 +72,13 @@ describe('buildStrategyOptions', () => {
 })
 
 describe('KakaoStrategy', () => {
-  it('strategy 이름은 kakao로 고정된다', () => {
+  it('is named "kakao"', () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
 
     expect(strategy.name).toBe('kakao')
   })
 
-  it('kapi 요청 시 access_token을 쿼리 파라미터가 아닌 Authorization 헤더로 보낸다', () => {
+  it('sends access_token as an Authorization header, not a query parameter, when calling kapi', () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
     const oauth2 = strategy['_oauth2'] as unknown as {
       _useAuthorizationHeaderForGET: boolean
@@ -87,7 +87,7 @@ describe('KakaoStrategy', () => {
     expect(oauth2._useAuthorizationHeaderForGET).toBe(true)
   })
 
-  it('kakao_account.profile.nickname으로 사용자 프로필을 파싱한다', async () => {
+  it('parses the user profile from kakao_account.profile.nickname', async () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
     stubUserProfileResponse(strategy, {
       id: 123,
@@ -106,7 +106,7 @@ describe('KakaoStrategy', () => {
     expect(profile?.username).toBe('roto')
   })
 
-  it('kakao_account가 없는 미연동 계정은 properties.nickname으로 대체 파싱한다', async () => {
+  it('falls back to properties.nickname when kakao_account is absent', async () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
     stubUserProfileResponse(strategy, {
       id: 456,
@@ -124,7 +124,7 @@ describe('KakaoStrategy', () => {
     expect(profile?.username).toBe('legacy-roto')
   })
 
-  it('nickname 정보가 전혀 없으면 미연동 계정으로 표기한다', async () => {
+  it('labels the profile as unlinked when no nickname is available at all', async () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
     stubUserProfileResponse(strategy, { id: 789 })
 
@@ -139,7 +139,7 @@ describe('KakaoStrategy', () => {
     expect(profile?.username).toBe('미연동 계정')
   })
 
-  it('OAuth2 요청이 실패하면 done에 에러를 그대로 전달한다', async () => {
+  it('passes the error through to done when the OAuth2 request fails', async () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
     const oauthError = { statusCode: 401, data: 'invalid_token' }
     stubUserProfileError(strategy, oauthError)
@@ -151,7 +151,7 @@ describe('KakaoStrategy', () => {
     expect(err).toBe(oauthError)
   })
 
-  it('응답 body가 유효한 JSON이 아니면 done에 파싱 에러를 전달한다', async () => {
+  it('passes a parse error through to done when the response body is not valid JSON', async () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
     stubUserProfileRawBody(strategy, 'not-json')
 

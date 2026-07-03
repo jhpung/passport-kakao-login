@@ -4,12 +4,12 @@ import * as entrypoint from '../src/index'
 import { KakaoStrategy } from '../src/strategy'
 
 describe('index', () => {
-  it('Strategy와 default export가 KakaoStrategy를 가리킨다', () => {
+  it('exports Strategy and default as KakaoStrategy', () => {
     expect(entrypoint.Strategy).toBe(KakaoStrategy)
     expect(entrypoint.default).toBe(KakaoStrategy)
   })
 
-  it('buildStrategyOptions를 재수출한다', () => {
+  it('re-exports buildStrategyOptions', () => {
     expect(entrypoint.buildStrategyOptions).toBeTypeOf('function')
   })
 })
