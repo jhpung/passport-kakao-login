@@ -27,6 +27,12 @@ npm run format:check   # prettier --check
 
 Run `typecheck`, `lint`, `format:check`, and `test:coverage` before committing. CI (`.github/workflows/ci.yml`) runs the same checks across Node 22/24/26.
 
+## Language
+
+- Write all code, comments, identifiers, test descriptions, and documentation in English.
+- Exception: `README-ko.md` is an intentional Korean translation of `README.md` — keep it in Korean.
+- Exception: runtime string values that mirror Kakao's own API behavior (e.g. the `'미연동 계정'` fallback nickname) stay as-is; they're data returned to consumers, not documentation.
+
 ## Code style
 
 - ESLint config: `eslint.config.mjs`, based on `eslint-config-google` + `typescript-eslint` recommended, with `eslint-config-prettier` disabling stylistic conflicts.
