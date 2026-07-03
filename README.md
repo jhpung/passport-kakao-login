@@ -95,6 +95,16 @@ function getEmail(kakaoAccount?: KakaoAccount): string | undefined {
 }
 ```
 
+This package exports a `KakaoAccount` type so you can type consent-scoped fields like email, gender, or birthday from `profile._json.kakao_account`:
+
+```ts
+import type { KakaoAccount } from 'passport-kakao-login'
+
+function getEmail(kakaoAccount?: KakaoAccount): string | undefined {
+  return kakaoAccount?.email
+}
+```
+
 ## Development
 
 ```sh

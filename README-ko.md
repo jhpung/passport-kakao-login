@@ -95,6 +95,16 @@ function getEmail(kakaoAccount?: KakaoAccount): string | undefined {
 }
 ```
 
+`KakaoAccount` 타입을 패키지에서 export하므로, `profile._json.kakao_account`의 email·gender·birthday 같은 동의항목 필드를 타입 지정할 수 있다.
+
+```ts
+import type { KakaoAccount } from 'passport-kakao-login'
+
+function getEmail(kakaoAccount?: KakaoAccount): string | undefined {
+  return kakaoAccount?.email
+}
+```
+
 ## Development
 
 ```sh

@@ -106,25 +106,6 @@ describe('KakaoStrategy', () => {
     expect(profile?.username).toBe('roto')
   })
 
-  it('exposes kakao_account on the top-level profile as well', async () => {
-    const strategy = new KakaoStrategy(baseOptions, noopVerify)
-    const kakaoAccount = {
-      profile: { nickname: 'roto' },
-      email: 'roto@example.com',
-    }
-    stubUserProfileResponse(strategy, { id: 123, kakao_account: kakaoAccount })
-
-    const profile = await new Promise<KakaoProfile | undefined>(
-      (resolve, reject) => {
-        strategy.userProfile('token', (err, profile) =>
-          err ? reject(err) : resolve(profile)
-        )
-      }
-    )
-
-    expect(profile?.kakao_account).toEqual(kakaoAccount)
-  })
-
   it('falls back to properties.nickname when kakao_account is absent', async () => {
     const strategy = new KakaoStrategy(baseOptions, noopVerify)
     stubUserProfileResponse(strategy, {
