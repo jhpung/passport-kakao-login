@@ -77,31 +77,10 @@ The `profile` argument passed to the verify callback has the shape:
 {
   provider: 'kakao',
   id: number,
-  username: string,          // kakao_account.profile.nickname, falls back to properties.nickname
+  username: string,   // kakao_account.profile.nickname, falls back to properties.nickname
   displayName: string,
-  kakao_account: KakaoAccount, // same object as _json.kakao_account, hoisted for convenience
-  _raw: string,               // raw JSON response body
-  _json: object,              // parsed JSON response
-}
-```
-
-`KakaoAccount` is exported by this package so you can type consent-scoped fields like email, gender, or birthday without reaching into `_json`:
-
-```ts
-import type { KakaoAccount } from 'passport-kakao-login'
-
-function getEmail(kakaoAccount?: KakaoAccount): string | undefined {
-  return kakaoAccount?.email
-}
-```
-
-This package exports a `KakaoAccount` type so you can type consent-scoped fields like email, gender, or birthday from `profile._json.kakao_account`:
-
-```ts
-import type { KakaoAccount } from 'passport-kakao-login'
-
-function getEmail(kakaoAccount?: KakaoAccount): string | undefined {
-  return kakaoAccount?.email
+  _raw: string,       // raw JSON response body
+  _json: object,      // parsed JSON response
 }
 ```
 

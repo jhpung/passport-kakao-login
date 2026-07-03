@@ -58,7 +58,6 @@ export class KakaoStrategy extends OAuth2Strategy {
           id: json.id,
           username: nickname,
           displayName: nickname,
-          kakao_account: json.kakao_account,
           _raw: body as string,
           _json: json,
         }

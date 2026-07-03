@@ -8,35 +8,6 @@ export interface KakaoStrategyOptions {
   userAgent?: string
 }
 
-export interface KakaoAccount {
-  profile_needs_agreement?: boolean
-  profile?: {
-    nickname?: string
-    thumbnail_image_url?: string
-    profile_image_url?: string
-    is_default_image?: boolean
-  }
-  name_needs_agreement?: boolean
-  name?: string
-  email_needs_agreement?: boolean
-  has_email?: boolean
-  is_email_valid?: boolean
-  is_email_verified?: boolean
-  email?: string
-  age_range_needs_agreement?: boolean
-  has_age_range?: boolean
-  age_range?: string
-  birthday_needs_agreement?: boolean
-  has_birthday?: boolean
-  birthday?: string
-  birthyear_needs_agreement?: boolean
-  has_birthyear?: boolean
-  birthyear?: string
-  gender_needs_agreement?: boolean
-  has_gender?: boolean
-  gender?: 'male' | 'female'
-}
-
 export interface KakaoRawProfile {
   id: number
   connected_at?: string
@@ -45,7 +16,34 @@ export interface KakaoRawProfile {
     profile_image?: string
     thumbnail_image?: string
   }
-  kakao_account?: KakaoAccount
+  kakao_account?: {
+    profile_needs_agreement?: boolean
+    profile?: {
+      nickname?: string
+      thumbnail_image_url?: string
+      profile_image_url?: string
+      is_default_image?: boolean
+    }
+    name_needs_agreement?: boolean
+    name?: string
+    email_needs_agreement?: boolean
+    has_email?: boolean
+    is_email_valid?: boolean
+    is_email_verified?: boolean
+    email?: string
+    age_range_needs_agreement?: boolean
+    has_age_range?: boolean
+    age_range?: string
+    birthday_needs_agreement?: boolean
+    has_birthday?: boolean
+    birthday?: string
+    birthyear_needs_agreement?: boolean
+    has_birthyear?: boolean
+    birthyear?: string
+    gender_needs_agreement?: boolean
+    has_gender?: boolean
+    gender?: 'male' | 'female'
+  }
 }
 
 export interface KakaoProfile {
@@ -53,7 +51,6 @@ export interface KakaoProfile {
   id: number
   username?: string
   displayName?: string
-  kakao_account?: KakaoAccount
   _raw: string
   _json: KakaoRawProfile
 }
