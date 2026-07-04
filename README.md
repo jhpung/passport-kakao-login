@@ -88,54 +88,55 @@ The `profile` argument passed to the verify callback has the shape:
 
 ```ts
 interface KakaoRawProfile {
-  id: number                  // Kakao member id
-  has_signed_up?: boolean     // whether the manual-connect API call has completed
-  connected_at?: string       // UTC timestamp when the app connected to the account
-  synched_at?: string         // UTC timestamp of the Kakao Sync simple-signup login
+  id: number // Kakao member id
+  has_signed_up?: boolean // whether the manual-connect API call has completed
+  connected_at?: string // UTC timestamp when the app connected to the account
+  synched_at?: string // UTC timestamp of the Kakao Sync simple-signup login
   properties?: {
     nickname?: string
     profile_image?: string
     thumbnail_image?: string
   }
   kakao_account?: {
-    profile_needs_agreement?: boolean          // profile (nickname/photo) consent
+    profile_needs_agreement?: boolean // profile (nickname/photo) consent
     profile_nickname_needs_agreement?: boolean // nickname consent
-    profile_image_needs_agreement?: boolean    // profile photo consent
+    profile_image_needs_agreement?: boolean // profile photo consent
     profile?: {
       nickname?: string
       thumbnail_image_url?: string
       profile_image_url?: string
       is_default_image?: boolean
-      is_default_nickname?: boolean            // whether the nickname is Kakao's placeholder
+      is_default_nickname?: boolean // whether the nickname is Kakao's placeholder
     }
     name_needs_agreement?: boolean
     name?: string
     email_needs_agreement?: boolean
-    has_email?: boolean         // @deprecated — cannot check availability, use email_needs_agreement
+    has_email?: boolean // @deprecated — cannot check availability, use email_needs_agreement
     is_email_valid?: boolean
     is_email_verified?: boolean
     email?: string
     age_range_needs_agreement?: boolean
-    has_age_range?: boolean     // @deprecated — cannot check availability, use age_range_needs_agreement
-    age_range?: string          // e.g. "20~29"
+    has_age_range?: boolean // @deprecated — cannot check availability, use age_range_needs_agreement
+    age_range?: string // e.g. "20~29"
     birthday_needs_agreement?: boolean
-    has_birthday?: boolean      // @deprecated — cannot check availability, use birthday_needs_agreement
-    birthday?: string           // MMDD format
+    has_birthday?: boolean // @deprecated — cannot check availability, use birthday_needs_agreement
+    birthday?: string // MMDD format
     birthday_type?: 'SOLAR' | 'LUNAR'
     is_leap_month?: boolean
     birthyear_needs_agreement?: boolean
-    has_birthyear?: boolean     // @deprecated — cannot check availability, use birthyear_needs_agreement
-    birthyear?: string          // YYYY format
+    has_birthyear?: boolean // @deprecated — cannot check availability, use birthyear_needs_agreement
+    birthyear?: string // YYYY format
     gender_needs_agreement?: boolean
-    has_gender?: boolean        // @deprecated — cannot check availability, use gender_needs_agreement
+    has_gender?: boolean // @deprecated — cannot check availability, use gender_needs_agreement
     gender?: 'male' | 'female'
     phone_number_needs_agreement?: boolean
     phone_number?: string
     ci_needs_agreement?: boolean
-    ci?: string                 // Connecting Information
+    ci?: string // Connecting Information
     ci_authenticated_at?: string
   }
-  for_partner?: {              // additional partner-linkage info
+  for_partner?: {
+    // additional partner-linkage info
     uuid?: string
   }
 }

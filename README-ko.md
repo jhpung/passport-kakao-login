@@ -88,54 +88,55 @@ verify 콜백에 전달되는 `profile`은 다음 구조를 가집니다.
 
 ```ts
 interface KakaoRawProfile {
-  id: number                  // 카카오 회원번호
-  has_signed_up?: boolean     // 수동 연결 API 호출 완료 여부
-  connected_at?: string       // 서비스 연결 완료 시각(UTC)
-  synched_at?: string         // 카카오싱크 간편가입 로그인 시각(UTC)
+  id: number // 카카오 회원번호
+  has_signed_up?: boolean // 수동 연결 API 호출 완료 여부
+  connected_at?: string // 서비스 연결 완료 시각(UTC)
+  synched_at?: string // 카카오싱크 간편가입 로그인 시각(UTC)
   properties?: {
     nickname?: string
     profile_image?: string
     thumbnail_image?: string
   }
   kakao_account?: {
-    profile_needs_agreement?: boolean          // 프로필(닉네임/사진) 제공 동의 여부
+    profile_needs_agreement?: boolean // 프로필(닉네임/사진) 제공 동의 여부
     profile_nickname_needs_agreement?: boolean // 닉네임 제공 동의 여부
-    profile_image_needs_agreement?: boolean    // 프로필 사진 제공 동의 여부
+    profile_image_needs_agreement?: boolean // 프로필 사진 제공 동의 여부
     profile?: {
       nickname?: string
       thumbnail_image_url?: string
       profile_image_url?: string
       is_default_image?: boolean
-      is_default_nickname?: boolean            // 기본 닉네임 여부
+      is_default_nickname?: boolean // 기본 닉네임 여부
     }
     name_needs_agreement?: boolean
     name?: string
     email_needs_agreement?: boolean
-    has_email?: boolean         // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, email_needs_agreement 사용
+    has_email?: boolean // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, email_needs_agreement 사용
     is_email_valid?: boolean
     is_email_verified?: boolean
     email?: string
     age_range_needs_agreement?: boolean
-    has_age_range?: boolean     // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, age_range_needs_agreement 사용
-    age_range?: string          // 예: "20~29"
+    has_age_range?: boolean // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, age_range_needs_agreement 사용
+    age_range?: string // 예: "20~29"
     birthday_needs_agreement?: boolean
-    has_birthday?: boolean      // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, birthday_needs_agreement 사용
-    birthday?: string           // MMDD 형식
+    has_birthday?: boolean // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, birthday_needs_agreement 사용
+    birthday?: string // MMDD 형식
     birthday_type?: 'SOLAR' | 'LUNAR'
     is_leap_month?: boolean
     birthyear_needs_agreement?: boolean
-    has_birthyear?: boolean     // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, birthyear_needs_agreement 사용
-    birthyear?: string          // YYYY 형식
+    has_birthyear?: boolean // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, birthyear_needs_agreement 사용
+    birthyear?: string // YYYY 형식
     gender_needs_agreement?: boolean
-    has_gender?: boolean        // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, gender_needs_agreement 사용
+    has_gender?: boolean // @deprecated — 제공 가능 여부 확인 용도로 사용 불가, gender_needs_agreement 사용
     gender?: 'male' | 'female'
     phone_number_needs_agreement?: boolean
     phone_number?: string
     ci_needs_agreement?: boolean
-    ci?: string                 // 연계정보(CI)
+    ci?: string // 연계정보(CI)
     ci_authenticated_at?: string
   }
-  for_partner?: {              // 파트너 연계 추가 정보
+  for_partner?: {
+    // 파트너 연계 추가 정보
     uuid?: string
   }
 }
