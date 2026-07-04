@@ -16,11 +16,11 @@ npm install passport-kakao-login passport
 
 ### 1. Kakao Developers 앱 설정
 
-[Kakao Developers](https://developers.kakao.com/) 콘솔에서 앱을 만들고 다음을 확인한다.
+[Kakao Developers](https://developers.kakao.com/) 콘솔에서 앱을 만들고 다음을 확인합니다.
 
 - **REST API 키** → `clientID`
-- **카카오 로그인 > Redirect URI** → `callbackURL`과 정확히 일치해야 한다
-- **보안 > Client Secret** 코드 → `clientSecret`. 기본적으로 활성화되어 있으며 활성화된 경우 토큰 발급 요청에 반드시 포함해야 한다
+- **카카오 로그인 > Redirect URI** → `callbackURL`과 정확히 일치해야 합니다
+- **보안 > Client Secret** 코드 → `clientSecret`. 기본적으로 활성화되어 있으며 활성화된 경우 토큰 발급 요청에 반드시 포함해야 합니다
 
 ### 2. Strategy 등록
 
@@ -48,7 +48,7 @@ passport.deserializeUser((id, done) => {
 })
 ```
 
-콘솔에서 Client Secret 기능을 끈 경우에 한해 `clientSecret`을 생략할 수 있다. 이 경우 `passport-oauth2` 요구사항을 맞추기 위한 임의 값(`'kakao'`)이 자동으로 채워진다.
+콘솔에서 Client Secret 기능을 끈 경우에 한해 `clientSecret`을 생략할 수 있습니다. 이 경우 `passport-oauth2` 요구사항을 맞추기 위한 임의 값(`'kakao'`)이 자동으로 채워집니다.
 
 ### 3. Express 라우트
 
@@ -71,16 +71,16 @@ app.get(
 
 ### Profile
 
-verify 콜백에 전달되는 `profile`은 다음 구조를 가진다.
+verify 콜백에 전달되는 `profile`은 다음 구조를 가집니다.
 
 ```ts
 {
   provider: 'kakao',
   id: number,
-  username: string,   // kakao_account.profile.nickname, 없으면 properties.nickname으로 대체
+  username: string,       // kakao_account.profile.nickname, 없으면 properties.nickname으로 대체
   displayName: string,
-  _raw: string,       // 원본 JSON 응답 문자열
-  _json: object,      // 파싱된 JSON 응답
+  _raw: string,           // 원본 JSON 응답 문자열
+  _json: KakaoRawProfile, // 파싱된 JSON 응답
 }
 ```
 

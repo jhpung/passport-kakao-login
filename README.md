@@ -77,10 +77,10 @@ The `profile` argument passed to the verify callback has the shape:
 {
   provider: 'kakao',
   id: number,
-  username: string,   // kakao_account.profile.nickname, falls back to properties.nickname
+  username: string,       // kakao_account.profile.nickname, falls back to properties.nickname
   displayName: string,
-  _raw: string,       // raw JSON response body
-  _json: object,      // parsed JSON response
+  _raw: string,           // raw JSON response body
+  _json: KakaoRawProfile, // parsed JSON response
 }
 ```
 
