@@ -84,6 +84,48 @@ The `profile` argument passed to the verify callback has the shape:
 }
 ```
 
+`_json` mirrors Kakao's raw `/v2/user/me` response and is exported as `KakaoRawProfile`:
+
+```ts
+interface KakaoRawProfile {
+  id: number
+  connected_at?: string
+  properties?: {
+    nickname?: string
+    profile_image?: string
+    thumbnail_image?: string
+  }
+  kakao_account?: {
+    profile_needs_agreement?: boolean
+    profile?: {
+      nickname?: string
+      thumbnail_image_url?: string
+      profile_image_url?: string
+      is_default_image?: boolean
+    }
+    name_needs_agreement?: boolean
+    name?: string
+    email_needs_agreement?: boolean
+    has_email?: boolean
+    is_email_valid?: boolean
+    is_email_verified?: boolean
+    email?: string
+    age_range_needs_agreement?: boolean
+    has_age_range?: boolean
+    age_range?: string
+    birthday_needs_agreement?: boolean
+    has_birthday?: boolean
+    birthday?: string
+    birthyear_needs_agreement?: boolean
+    has_birthyear?: boolean
+    birthyear?: string
+    gender_needs_agreement?: boolean
+    has_gender?: boolean
+    gender?: 'male' | 'female'
+  }
+}
+```
+
 ## Development
 
 ```sh
