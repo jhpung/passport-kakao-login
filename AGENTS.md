@@ -25,7 +25,7 @@ npm run lint           # eslint
 npm run format:check   # prettier --check
 ```
 
-Run `typecheck`, `lint`, `format:check`, and `test:coverage` before committing. CI (`.github/workflows/ci.yml`) runs the same checks across Node 22/24/26.
+Run `typecheck`, `lint`, `format:check`, and `test:coverage` before committing. A Lefthook `pre-commit` hook (`lefthook.yml`) already enforces `lint`, `typecheck`, and `build` on every commit — run `format:check` and `test:coverage` manually since those aren't hooked. `npm install` runs `prepare` (`lefthook install`), which wires up the hook. CI (`.github/workflows/ci.yml`) runs the same checks across Node 22/24/26.
 
 ## Language
 
